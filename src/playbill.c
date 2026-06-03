@@ -54,7 +54,11 @@ SECTION_TEXT_PLAYBILL void CreatePlaybill(void) {
     SetPlaybillColors();
     SCENE_SELECTOR_ADV_MENU = CreateAdvancedMenu(&menu_params, menu_flags, &menu_info, SceneOptionEntryFn, menu_options, menu_options_pp);
     SCENE_SELECTOR_PARTICIPANT_LISTING = CreateDialogueBox(&dbox_params);
+    #if EVENT_FINISHED
     CreateCustomControlsChart(TEXT_STRING_FLAVOR_BLURB);
+    #else
+    CreateCustomControlsChart(TEXT_STRING_MYSTERYMAIL_BLURB);
+    #endif
     ShowStringIdInDialogueBox(SCENE_SELECTOR_PARTICIPANT_LISTING, PREPROC_INSTANT_NO_INPUT, TEXT_STRING_PARTICIPANT_NAME_START+option_id, NULL);
     GLOBAL_MENU_INFO.previous_option = option_id;
 }
