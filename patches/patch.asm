@@ -54,6 +54,12 @@
 	.area 0x4
 		b TryParseExtraFontNumber
 	.endarea
+	
+	.org GetStringFromFileVeneer+0x8
+	.area 0x4
+		.word CustomGetStringFromFile
+	.endarea
+	
 .close
 
 .open "overlay11.bin", overlay11_start

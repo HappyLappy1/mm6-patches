@@ -185,6 +185,16 @@ __attribute((used)) void YouCanDoAnything(void) {
     }
 }
 
+/*
+	Hijack some custom exceptions for Text Strings.
+*/
+__attribute((used)) void CustomGetStringFromFile(char* buf, int string_id) {
+	if(TEXT_STRING_HIJACK_OPTIONS_MENU <= string_id && string_id <= TEXT_STRING_HIJACK_OPTIONS_MENU+TOTAL_SCENES_PER_BRANCH)
+		sprintf(buf, "%02d", string_id-TEXT_STRING_HIJACK_OPTIONS_MENU);
+	else
+		GetStringFromFile(buf, string_id);
+}
+
 __attribute((used)) uint32_t TryChangeTextSpeed(struct dialogue_display_state* state) {
 	unsigned long long result = _s32_div_f((state->text_speed * text_numerator + text_count), text_denominator);
 	text_count = result >> 32;
