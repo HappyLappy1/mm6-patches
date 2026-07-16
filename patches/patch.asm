@@ -81,7 +81,6 @@
 	.area 0x4
 		bl HijackFileOpenInner
 	.endarea
-	
 .close
 
 .open "overlay11.bin", overlay11_start
@@ -103,11 +102,6 @@
 	.org AfterAttributeBitfieldSwitchCase
 	.area 0x4
 		b ManipulateActorLayering
-	.endarea
-	
-	.org CreateSaveMenuCallsite
-	.area 0x4
-		bl CardPullOut
 	.endarea
 	
 	.org CreateDayCareMenuCallsite
