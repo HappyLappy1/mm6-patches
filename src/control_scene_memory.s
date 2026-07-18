@@ -2,8 +2,8 @@
 	.global SpControlSceneMemory
 // ---------------------------------------------------------------------------------------------------------------
 // control_scene_mentry.s
-// by happylappy
-// Loads the save file, bitors a bitfield of whether a scene has been played, saves the game, and returns the 
+// Loads the save file, bitors a specified bit in a bitfield of whether a scene has been played, saves the
+// game, and returns if the bit is true.
 // param_1: (1 if should_load) + (2 if should_write) + (4 if should_save) + (8 if should_read)
 // param_2: (Scene scn 1 = 1, scn 2 = 2, etc.) + 16 * (Branch: E = 0, C = 1, O = 2)
 // Returns: If should_read is true: 1 if the specified branch has been played, 0 if not. Else Nothing.
