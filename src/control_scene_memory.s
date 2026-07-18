@@ -1,7 +1,7 @@
 .align 4
 	.global SpControlSceneMemory
 // ---------------------------------------------------------------------------------------------------------------
-// control_scene_mentry.s
+// control_scene_memory.s
 // By happylappy
 // Loads the save file, bitors a specified bit in a bitfield of whether a scene has been played, saves the
 // game, and returns if the bit is true.
@@ -11,10 +11,10 @@
 // ----------------------------------------------------------------------------------------------------------------
 
 	SpControlSceneMemory:
-		push {r8-r11,lr}
+		push {r6-r11,lr}
 		mov r7, r0
 		mov r6, r1
-		ands r10, r6, #0x10; // Put the Scene number in r10.
+		ands r10, r6, #0xF; // Put the Scene number in r10.
 		subne r10, #0x1; // If non-zero, subtract 1 from the scene number to be zero-indexed.
 		mov r9, r6, lsr #0x4; // Retrieve the branch index.
 		// The halfwords for chansey's corner of GAME_STATE_VALUES only stores 12, 12, and 8 bits from their respective half-words.
@@ -52,10 +52,8 @@
 		ldrh r8, [r11, #0x0]
 		tst r7, #0x8
 		moveq r0, #0x0
-		beq ShouldNotRead
+		popeq {r6-r11,pc}; // Should Not Read
 		mov r0, #0x1
 		and r0, r0, r8, lsr r10
-		pop {r8-r11,pc}
-	ShouldNotRead:
-		moveq r0, #0x0
-		pop {r8-r11,pc}
+		pop {r6-r11,pc}
+		
