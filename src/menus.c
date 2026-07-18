@@ -63,8 +63,16 @@ __attribute((used)) struct custom_menu CUSTOM_MENUS[] = {
         .create = CreateMysteryMailMenu,
         .close = CloseMysteryMailMenu,
         .update = UpdateMysteryMailMenu
+    },
+    {
+        // SPECIAL: This menu will use whatever code is loaded in the scratch area
+        // Code can be loaded using special process SpLoadCode
+        // with a string for the first arg
+        .create = (void (*)())0x23D7FF0,
+        .close = (void (*)())0x23D7FF4,
+        .update = (bool (*)())0x23D7FF8
     }
 };
 
-struct global_menu_info GLOBAL_MENU_INFO;
+__attribute__((section(".data.fixed1"))) struct global_menu_info GLOBAL_MENU_INFO;
 const int CUSTOM_MENU_AMOUNT = ARRAY_LENGTH(CUSTOM_MENUS);
